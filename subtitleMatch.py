@@ -3,8 +3,9 @@ import sys
 import shutil
 
 curDir = ""
+NSC_INTEREST = 8.1
 videoTypes = ['.mp4','.avi','.mkv','.vob','.flv']
-subsType = ['.srt']
+subsType = ['.srt','.sub']
 SUB_SRT = ".srt"
 DEL_FILES = ['.txt','.zip','.nfo','.db','.jpg','.png','.rar']
 THRESHHOLD = 7
@@ -125,6 +126,7 @@ def processFolder(dir):
         print s
         if os.path.isdir(s):
             if getNumofVideoFiles(s) == 1:
+				print os.path.join(root,dir)
                 renameSingleVideoSubs(os.path.join(dir,s))
                 #return
             
@@ -144,20 +146,55 @@ def processRecursiveFolder(dirFolder):
                 renameSingleVideoSubs(os.path.join(root,dir))
                 
 
-def processSampleVideos(dir):
+def deleteSampleVideos(dir):
     for root, directories, filenames in os.walk(dir):
         for f in filenames:
             pos = f.rfind('.')
             type = f[pos:]
             if type in videoTypes:
-                if 'sample' in f or 'Sample' in f or 'SAMPLE' in f:
+                if 'sample' in f.lower():
                     print os.path.join(root,f)
                     os.remove(os.path.join(root,f))
-                    #renameSingleVideoSubs(os.path.join(root,dir))
+					
+def clubVideosFolder(dirFolder):
+    for root, directories, filenames in os.walk(dirFolder):
+        for dir in directories:
+            for f in os.listdir(dir):
+                pos = f.rfind('.')
+                type = f[pos:]
+                if type in DEL_FILES:
+                    os.remove(os.path.join(dir,f))
+                    continue
+                #print os.path.join(root,dir,f)
+                try:
+                    os.rename(os.path.join(root,dir,f),os.path.join(root,f))        
+                except WindowsError as err:
+                    print err, os.path.join(root,dir,f)                
+            os.rmdir(os.path.join(root,dir))   
+			
+def renameSubsByOrder(dir):
+    fileCount = getNumofVideoFiles(dir)
+    if fileCount != getNumofSubFiles(dir):
+        print "Files count mismatch"
+        return
+        
+    videoList = [f for f in os.listdir(dir) if f[f.rfind('.'):] in videoTypes]
+    subsList = [s for s in os.listdir(dir) if s.endswith(SUB_SRT)]
     
+    for count in range(0, fileCount):
+        video = videoList[count]
+        subs = subsList[count]
+        pos = video.rfind('.')
+        name = video[:pos]
+        print subs + "  =>  " + name+SUB_SRT
+        os.rename(subs,name+SUB_SRT)        
+    
+    return
+    
+	
 def calculateNSC():
     amt = 100
-    interest = 8.5/100
+    interest = NSC_INTEREST/100
     yrs = 5
     for i in range(5):
         val = amt * interest
@@ -165,6 +202,7 @@ def calculateNSC():
     print amt
     return
 
+	
 if __name__ == "__main__":
 
     os.chdir('F:\latest')
