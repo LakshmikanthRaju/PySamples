@@ -3,8 +3,7 @@ import sys
 import shutil
 
 curDir = ""
-nscInterest = 8.1
-videoTypes = ['.mp4','.avi','.mkv','.vob','.flv']
+videoTypes = ['.mp4','.avi','.mkv','.vob','.flv','.rmvb','.mpg']
 subsType = ['.srt']
 SUB_SRT = ".srt"
 DEL_FILES = ['.txt','.zip','.nfo','.db','.jpg','.png','.rar']
@@ -47,11 +46,11 @@ def renameSingleVideoSubs(dir):
         subName = name+SUB_SRT
         if sub != subName:
             if os.path.exists(os.path.join(dir,subName)):
-                os.remove(os.path.join(dir,s))
+                os.remove(os.path.join(dir,sub))
             try:
-                os.rename(os.path.join(dir,s), os.path.join(dir,subName))        
+                os.rename(os.path.join(dir,sub), os.path.join(dir,subName))        
             except WindowsError as err:
-                print err, os.path.join(dir,s)
+                print err, os.path.join(dir,sub)
     return
                 
     
@@ -75,7 +74,7 @@ def deleteSampleVideos(dir):
 				
 def processSingleVideos(dir):
 	deleteSampleVideos(dir)
-	processRecursiveSingleVideos()
+	processRecursiveSingleVideos(dir)
     
 
 def getMatchedCount(dir):
@@ -101,7 +100,7 @@ def renameSubsByOrder(dir):
         print "Files count mismatch"
         return
         
-    if fileCount == getMatchedCount(dir)
+    if fileCount == getMatchedCount(dir):
         print "Already ordered"
         return
         
@@ -113,7 +112,6 @@ def renameSubsByOrder(dir):
         subs = subsList[count]
         pos = video.rfind('.')
         name = video[:pos]
-        #print subs + "  =>  " + name+SUB_SRT
         os.rename(subs,name+SUB_SRT)        
     
     return
@@ -136,41 +134,8 @@ def clubVideosFolder(dirFolder):
 	
 if __name__ == "__main__":
 
-    os.chdir('E:\seasons\Spartacus\spartacus - wrath of the damned')
+    os.chdir('E:\\seasons\\Freaks and Geeks')
     curDir = os.getcwd()
     #processSingleVideos(curDir)
-    clubVideosFolder(curDir)
-
-
-def isolateVideos(dir): # not required anymore
-    for f in os.listdir(dir):
-        if os.path.isfile(f):
-            pos = f.rfind('.')
-            type = f[pos:]
-            if type in videoTypes:
-                name = f[:pos]
-                newDir = os.path.join(dir,name)
-                os.makedirs(newDir)
-                os.rename(os.path.join(dir,f),os.path.join(newDir,f))
-        
-
-def renameSubsByName(dir): # unused function
-    for f in os.listdir(dir):
-        pos = f.rfind('.')
-        type = f[pos:]
-        
-        if type in videoTypes:
-            name = f[:pos]                        
-            match_sub = ""
-            
-            for s in os.listdir(dir):                
-                if s.endswith(SUB_SRT):
-                    pos1 = s.rfind('.')
-                    name1 = s[:pos1]
-                    
-                    if name[:breakPoint].lower() == name1[:breakPoint].lower():
-                        match_sub = s
-
-            print match_sub + "  =>  " + name+SUB_SRT
-            os.rename(match_sub,name+SUB_SRT)
-    return
+    #clubVideosFolder(curDir)
+    renameSubsByOrder(curDir)
