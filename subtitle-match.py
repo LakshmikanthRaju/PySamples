@@ -1,13 +1,28 @@
+#!/usr/bin/env python
+
+# Renames subtitles to video's name to support automatic subtitle loading
+# Removes unwanted sample videos, zip files and images
+# Clubs videos of same series together for easy access
+#
+# Set up: None
+#
+# Command line inputs: None
+# In file inputs:
+#   Give folder name in SRC_DIR
+#   Give currency code in CURRENCY url
+# Runtime inputs: None
+
 
 import os
 import sys
 import shutil
 
-curDir = ""
-videoTypes = ['.mp4','.avi','.mkv','.vob','.flv','.rmvb','.mpg']
-subsType = ['.srt']
-SUB_SRT = ".srt"
+SRC_DIR = 'E:\\seasons\\Freaks and Geeks'
+
+VIDEO_TYPES = ['.mp4','.avi','.mkv','.vob','.flv','.rmvb','.mpg']
 DEL_FILES = ['.txt','.zip','.nfo','.db','.jpg','.png','.rar']
+SUBS_TYPE = ['.srt']
+SUB_SRT = ".srt"
 THRESHHOLD = 7
 #checkPoint = 17
 
@@ -17,7 +32,7 @@ def getNumofVideoFiles(dir):
         pos = f.rfind('.')
         type = f[pos:]
         
-        if type in videoTypes:
+        if type in VIDEO_TYPES:
             count = count + 1
             
     return count
@@ -38,7 +53,7 @@ def renameSingleVideoSubs(dir):
         type = f[pos:]
         if type in DEL_FILES:
             os.remove(os.path.join(dir,f))
-        elif type in videoTypes:
+        elif type in VIDEO_TYPES:
             name = f[:pos]
         elif f.endswith(SUB_SRT):
             sub = f
@@ -68,7 +83,7 @@ def deleteSampleVideos(dir):
         for f in filenames:
             pos = f.rfind('.')
             type = f[pos:]
-            if type in videoTypes:
+            if type in VIDEO_TYPES:
                 if 'sample' in f.lower():
                     print os.path.join(root,f)
                     os.remove(os.path.join(root,f))
@@ -81,7 +96,7 @@ def processSingleVideos(dir):
 def getMatchedCount(dir):
     
     matched_count = 0
-    videoList = [f for f in os.listdir(dir) if f[f.rfind('.'):] in videoTypes]
+    videoList = [f for f in os.listdir(dir) if f[f.rfind('.'):] in VIDEO_TYPES]
     subsList = [s for s in os.listdir(dir) if s.endswith(SUB_SRT)]
     
     video, subs = videoList[0].lower(), subsList[0].lower()
@@ -105,7 +120,7 @@ def renameSubsByOrder(dir):
         print "Already ordered"
         return
         
-    videoList = [f for f in os.listdir(dir) if f[f.rfind('.'):] in videoTypes]
+    videoList = [f for f in os.listdir(dir) if f[f.rfind('.'):] in VIDEO_TYPES]
     subsList = [s for s in os.listdir(dir) if s.endswith(SUB_SRT)]
     
     for count in range(0, fileCount):
@@ -135,8 +150,8 @@ def clubVideosFolder(dirFolder):
 	
 if __name__ == "__main__":
 
-    os.chdir('E:\\seasons\\Freaks and Geeks')
-    curDir = os.getcwd()
-    #processSingleVideos(curDir)
-    #clubVideosFolder(curDir)
-    renameSubsByOrder(curDir)
+    os.chdir(SRC_DIR)
+    SRC_DIR = os.getcwd()
+    #processSingleVideos(SRC_DIR)
+    #clubVideosFolder(SRC_DIR)
+    renameSubsByOrder(SRC_DIR)

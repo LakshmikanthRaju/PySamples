@@ -1,4 +1,15 @@
-# pip install Pillow
+#!/usr/bin/env python
+
+# Convert images with adequate resolution to landscape and portrait for wallpapers
+#
+# Set up:
+#   pip install Pillow
+#
+# Command line inputs: None
+# In file inputs:
+#   Give the images folder as SRC_DIR
+#   Give the output folder as DEST_LS for landscape, DEST_PT for portrait
+# Runtime inputs: None
 
 import os
 import shutil

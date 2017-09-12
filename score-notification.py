@@ -1,7 +1,14 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
-# pip install beautifulsoup4
-# download and install PyQt4
+# Get the current cricket matches score in prompt window in regular intervals
+#
+# Set up:
+#   Manually, download and install PyQt4
+#   pip install beautifulsoup4
+#
+# Command line inputs: None
+# In file inputs: Change the MATCH_INDEX ato select the required match
+# Runtime inputs: None
 
 import sys
 import requests
@@ -11,9 +18,10 @@ from time import sleep
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
+MATCH_INDEX = 1
 SCORE_URL = "http://static.cricinfo.com/rss/livescores.xml"
 
-def sendmessage(title, message):
+def displayDialog(title, message):
     app = QApplication(sys.argv)
     w = QWidget()
     w.setWindowTitle(title)
@@ -31,7 +39,7 @@ while True:
         r = requests.get(url)
     soup = BeautifulSoup(r.text, "html.parser")
     data = soup.find_all("description")
-    score = data[1].text
+    score = data[MATCH_INDEX].text
     print "SCORE: " + message
-    sendmessage("Score", score)
+    displayDialog("Score", score)
     sleep(60)

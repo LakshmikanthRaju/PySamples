@@ -1,3 +1,16 @@
+#!/usr/bin/env python
+
+# Update files and its content by comparing it with source
+# TODO: Sync it with Google Drive
+#
+# Set up: None
+#
+# Command line inputs: None
+# In file inputs:
+#   Give source file name in SRC_FILE
+#   Give destination file name in DST_FILE
+# Runtime inputs: None
+
 import os
 import time
 import shutil

@@ -1,8 +1,18 @@
+#!/usr/bin/env python
+
+# Delete the interim folders node_modules, bower_components, typings in angular projects recursively
+#
+# Set up: None
+#
+# Command line inputs: None
+# In file inputs: Give the folder name as SRC_DIR
+# Runtime inputs: None
+
 import os
 import sys
 import shutil
 
-curDir = ""
+SRC_DIR = "D:\\node-py\\Coursera\\angular"
 
 def removeNpmBower(path):
     #bower_components,node_modules
@@ -20,5 +30,4 @@ def processDirectory(dir):
                 removeNpmBower(os.path.join(root, d))
 
 if __name__ == "__main__":
-    curDir = "D:\\node-py\\Coursera\\angular"
-    processDirectory(curDir)
+    processDirectory(SRC_DIR)

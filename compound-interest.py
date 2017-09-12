@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+
+# Calculate compound interest amount with amount, interest rate,
+# time and compounding time
+#
+# Set up: None
+#
+# Command line inputs: None
+# In file inputs: None
+# Runtime inputs: Yes
 
 p = 0
 n = 0

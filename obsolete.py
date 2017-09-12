@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+
+# No longer used programs. Moved unused ones here. Maintained only for reference
+#
+# Set up: None
+#
+# Command line inputs: None
+# In file inputs: None
+# Runtime inputs: None
+
 def isolateVideos(dir): # not required anymore
     for f in os.listdir(dir):
         if os.path.isfile(f):

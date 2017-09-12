@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+
+# Search for string in the files content of the folder recursively
+#
+# Set up: None
+#
+# Command line inputs: $1 - Search string, $2 - folder path
+# In file inputs: None
+# Runtime inputs: None
+
 import os
 import sys
 

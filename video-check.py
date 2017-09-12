@@ -1,4 +1,15 @@
-# pip install pymediainfo
+#!/usr/bin/env python
+
+# Run all the video files in given folder at regular periods to check if it is corrupted
+#
+# Set up:
+#   pip install pymediainfo
+#
+# Command line inputs: None
+# In file inputs:
+#   Give folder name in SRC_DIR
+#   Give currency code in CURRENCY url
+# Runtime inputs: None
 
 import os
 import subprocess

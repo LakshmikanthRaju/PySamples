@@ -1,4 +1,13 @@
-# pip install beautifulsoup4
+#!/usr/bin/env python
+
+# Get the currency exchange rate for usd in inr
+#
+# Set up: pip install beautifulsoup4
+#
+# Command line inputs: None
+# In file inputs: None
+# Runtime inputs: None
+
 
 import requests
 import json
