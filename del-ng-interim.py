@@ -16,7 +16,7 @@ def removeNpmBower(path):
 def processDirectory(dir):
     for root, directories, filenames in os.walk(dir):
         for d in directories:
-            if d == "bower_components" or d == "node_modules":
+            if d == "bower_components" or d == "node_modules" or d == "typings":
                 removeNpmBower(os.path.join(root, d))
 
 if __name__ == "__main__":
