@@ -7,8 +7,7 @@
 #
 # Command line inputs: None
 # In file inputs:
-#   Give folder name in SRC_DIR
-#   Give currency code in CURRENCY url
+#   Give folder name in PATH
 # Runtime inputs: None
 
 import os
@@ -17,11 +16,11 @@ import time
 import shutil
 from pymediainfo import MediaInfo
 
-VLC = 'C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe'
-TYPE = '.mkv'
-
 PATH = "F:\\Seasons\\__corrupted\\Discovery_Channel"
-FILE = 'F:\\Movies\\english-br\\Action\\DRIVE ANGRY\\part 1.mkv'
+MOVE_DEST = 'F:\\Seasons\\2_get\\'
+
+VLC = 'C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe'
+VIDEO_TYPES = ['.mkv', '.avi', '.mp4']
 
 def displayDirs(path):
     for dir in os.listdir(path):
@@ -43,7 +42,6 @@ def getDuration(file):
     
 def moveDir(path):
     move = False
-    DST = 'F:\\Seasons\\2_get\\'
     for dirname, dirnames, filenames in os.walk(path):
         # print path to all subdirectories first.
         for dir in dirnames:
@@ -52,13 +50,14 @@ def moveDir(path):
                     move = True
             if move:        
                 print "Moving " + os.path.join(path,dir)         
-                shutil.move(os.path.join(path,dir), DST)
+                shutil.move(os.path.join(path,dir), MOVE_DEST)
                 move = False
         break    
 
 def playFilesDir(path):
     for file in os.listdir(path):
-        if not file.endswith(TYPE):
+        file_type = file[file.rfind('.'):]
+        if file_type not in file.endswith(VIDEO_TYPES):
             continue
         vid = os.path.join(path, file)
         print file
@@ -73,6 +72,7 @@ def playFilesDir(path):
 if __name__ == "__main__":
     #displayDirs(PATH)
     #print os.stat(FILE).st_size
+    #FILE = 'F:\\Movies\\english-br\\Action\\DRIVE ANGRY\\part 1.mkv'
     #print FILE
     playFilesDir(PATH)
     #moveDir('F:\Seasons\_updated')
@@ -93,7 +93,8 @@ def playFiles(path):
         # print path to all subdirectories first.
         for dir in dirnames:
             vid = os.path.join(path, dir, os.listdir(os.path.join(path, dir))[0])
-            if vid.endswith(TYPE):
+            vid_type = vid[vid.rfind('.'):]
+            if vid_type in VIDEO_TYPES:
                 print dir
                 time.sleep(2)
                 p = subprocess.Popen([VLC, vid, '--start-time', str(5400)])
