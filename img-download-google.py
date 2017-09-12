@@ -1,3 +1,7 @@
+#!/usr/bin/env python2
+
+# pip install beautifulsoup4
+
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -11,7 +15,7 @@ def get_soup(url, header):
     urlopen = urllib2.urlopen(openurl)
     return BeautifulSoup(urlopen, 'html.parser')
 
-query = "waterfall wallpapers"#raw_input("query image")# you can change the query for the image  here
+query = "waterfall wallpapers"#you can change the query for the image  here
 image_name = "Image"
 query = query.split()
 query = '+'.join(query)
