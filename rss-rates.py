@@ -2,7 +2,9 @@
 
 # Get the currency exchange rate for usd in inr
 #
-# Set up: pip install beautifulsoup4
+# Set up:
+#   pip install beautifulsoup4
+#   pip install requests
 #
 # Command line inputs: None
 # In file inputs: None

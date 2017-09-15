@@ -4,6 +4,7 @@
 #
 # Set up:
 #   pip install beautifulsoup4
+#   pip install requests
 #
 # Command line inputs: None
 # In file inputs:

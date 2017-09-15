@@ -2,7 +2,8 @@
 
 # Sample program to download image from the given image url
 #
-# Set up: None
+# Set up:
+#   pip install requests
 #
 # Command line inputs: None
 # In file inputs: Give the image url as IMAGE_URL
