@@ -17,7 +17,7 @@ import os
 import sys
 import shutil
 
-SRC_DIR = 'E:\\seasons\\Freaks and Geeks'
+SRC_DIR = 'F:\\Enters'
 
 VIDEO_TYPES = ['.mp4','.avi','.mkv','.vob','.flv','.rmvb','.mpg']
 DEL_FILES = ['.txt','.zip','.nfo','.db','.jpg','.png','.rar']
@@ -26,7 +26,7 @@ SUB_SRT = ".srt"
 THRESHHOLD = 7
 #checkPoint = 17
 
-def getNumofVideoFiles(dir):
+def getVideoFilesCount(dir):
     count = 0
     for f in os.listdir(dir):
         pos = f.rfind('.')
@@ -37,14 +37,14 @@ def getNumofVideoFiles(dir):
             
     return count
     
-def getNumofSubFiles(dir):
+def getSubtitleFilesCount(dir):
     count = 0
     for s in os.listdir(dir):
         if s.endswith(SUB_SRT):
             count = count + 1
     return count
     
-def renameSingleVideoSubs(dir):
+def renameSingleVideoSubtitle(dir):
     name = ""
     sub = ""
     
@@ -73,9 +73,9 @@ def renameSingleVideoSubs(dir):
 def processRecursiveSingleVideos(dirFolder):
     for root, directories, filenames in os.walk(dirFolder):
         for dir in directories:
-            if getNumofVideoFiles(os.path.join(root,dir)) == 1:
+            if getVideoFilesCount(os.path.join(root,dir)) == 1:
                 print os.path.join(root,dir)
-                renameSingleVideoSubs(os.path.join(root,dir))
+                renameSingleVideoSubtitle(os.path.join(root,dir))
                 
 
 def deleteSampleVideos(dir):
@@ -110,9 +110,9 @@ def getMatchedCount(dir):
     return matched_count
     
 def renameSubsByOrder(dir):
-    fileCount = getNumofVideoFiles(dir)
+    fileCount = getVideoFilesCount(dir)
     
-    if fileCount != getNumofSubFiles(dir):
+    if fileCount != getSubtitleFilesCount(dir):
         print "Files count mismatch"
         return
         
@@ -151,7 +151,7 @@ def clubVideosFolder(dirFolder):
 if __name__ == "__main__":
 
     os.chdir(SRC_DIR)
-    SRC_DIR = os.getcwd()
+    #SRC_DIR = os.getcwd()
     #processSingleVideos(SRC_DIR)
     #clubVideosFolder(SRC_DIR)
     renameSubsByOrder(SRC_DIR)

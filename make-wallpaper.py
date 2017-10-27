@@ -80,4 +80,4 @@ def flipSave(file):
 def changeToLandscape(dir):    
     for file in os.listdir(dir):
         if isPotrait(file):
-            rotateSave(filename)            
+            rotateSave(file)

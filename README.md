@@ -1,6 +1,18 @@
-## Python Samples
-This repository consists of several single file python samples for minor tasks
+## PySamples
+This repository consists of several single file python samples for minor tasks  
+Run below command to install dependent python packages  
+    `$ pip install -r requirements.txt`
 
+### Creation of *requirements.txt*
+The below command will create **requirements.txt** file with list of packages in this project to be installed  
+    `$ pip install pipreqs`  
+    `$ pipreqs .`  
+     
+The below command will update the ***requirements.txt*** with additional packages which are installed recently  
+    `$ pipreqs . --force`
+___
+## List of Programs    
+    
 ### compound-interest
 Calculate compound interest amount
 
