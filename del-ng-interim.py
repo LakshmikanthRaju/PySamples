@@ -17,10 +17,10 @@ SRC_DIR = "D:\\node-py\\Coursera\\angular"
 def removeInterim(path):
     # bower_components, node_modules, typings
     print path
-    #try:
-    #    shutil.rmtree(path) #os.remove(path)
-    #except WindowsError as err:
-    #    print err
+    try:
+        shutil.rmtree(path) #os.remove(path)
+    except WindowsError as err:
+        print err
 
 def processDirectory(dir):
     print "Processing", dir
