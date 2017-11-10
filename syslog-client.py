@@ -4,6 +4,7 @@ import argparse
 import logging
 import logging.handlers
 
+
 parser = argparse.ArgumentParser(__file__,
                                  description="A syslog message generator")
 
@@ -50,6 +51,7 @@ if __name__ == "__main__":
     log.setLevel(string_to_level(args.level))
 
     handler = logging.handlers.SysLogHandler(address=(args.address, args.port), facility=19)
+    #handler = logging.handlers.SysLogHandler(address='/dev/log') # this logs in local machine, above one fails for local
     formatter = logging.Formatter('%(module)s.%(funcName)s: %(message)s')
     handler.setFormatter(formatter)
     log.addHandler(handler)

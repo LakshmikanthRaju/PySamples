@@ -14,6 +14,10 @@ n = 0
 d = 0
 r = 0
 
+YEARS = range(1,11)
+INTREST = range(5,11)
+
+
 def get_input():
     global p,n,r,d
     amount_str = raw_input('Enter the amount: ')
@@ -32,6 +36,7 @@ def calculate_yr(mon):
         val = (p * r * 0.01 * d)/12
         p = p + val
         times = times - 1
+    print "Final amount: " + str(p)
         
 def calculate():
     global n
@@ -42,8 +47,21 @@ def calculate():
         while times > 0:
             calculate_yr(12)
             times = times - 1
-            
+
+def get_simple(interest):
+    simple = []
+    interest = interest / 100.0
+    for i in YEARS:
+        value = (((1+interest)**i)-1)*100
+        simple.append(round(value,2))
+    return simple
+
+def simple_vs_compound():
+    print '%%', YEARS
+    for i in INTREST:
+        print format(i, '02d'), get_simple(i)
+
 if __name__ == "__main__":
-    get_input()
-    calculate()
-    print "Final amount: " + str(p)
+    #get_input()
+    #calculate()
+    simple_vs_compound()
