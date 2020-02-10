@@ -19,7 +19,7 @@ from pymediainfo import MediaInfo
 PATH = "F:\\Seasons\\__corrupted\\Discovery_Channel"
 MOVE_DEST = 'F:\\Seasons\\2_get\\'
 
-VLC = 'C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe'
+VLC = 'C:\\Program Files\\VideoLAN\\VLC\\vlc.exe'
 VIDEO_TYPES = ['.mkv', '.avi', '.mp4']
 
 def displayDirs(path):
